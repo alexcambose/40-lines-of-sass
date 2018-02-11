@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>30 lines sass flexbox grid</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="grid-standard.css">
+    <style>
+        :root {
+            --header-height: 400px;
+            --footer-height: 120px;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Raleway', sans-serif;
+            color: #333;
+        }
+        body {
+            line-height: 24px;
+        }
+        header {
+            height: var(--header-height);
+            background: linear-gradient(45deg, #5d5e99, #7987c0);
+            color: #fff;
+            text-shadow: 1px 1px 9px rgba(0,0,0,.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            flex-direction: column;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+        header .title {
+            font-size: 3em;
+            line-height: 50px;
+        }
+        footer {
+            height: var(--footer-height);
+            background: linear-gradient(45deg, #5d5e99, #7987c0);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+        footer .container {
+            display: flex;
+        }
+        footer ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        footer ul img {
+            height: 10px;
+            width: 10px;
+        }
+        a {
+            text-decoration: none;
+            color: #F3E96B;
+        }
+        footer .right {
+            text-align: center;
+            margin-left: auto;
+        }
+        .content {
+            position: relative;
+            margin-top: var(--header-height);
+            margin-bottom: var(--footer-height);
+            z-index: 2;
+            padding: 10px 0;
+            background-color: #fff;
+        }
+        .why, .flavour ,.usage {
+            margin: 20px 0;
+        }
+        .title {
+            text-align: center;
+            font-size: 3em;
+            padding: 30px 0;
+        }
+        .info-box {
+            text-align: center;
+        }
+        .info-box .title {
+            font-size: 2em;
+            padding: 8px 0;
+        }
+        .info-box .icon {
+            width: 80px;
+            height: 80px;
+        }
+        .menu {
+            text-align: center;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .menu li:nth-child(even) {
+            border-left: 0 solid #666;
+        }
+        .menu li {
+            display: inline-block;
+            padding: 10px;
+            font-size: 1.2em;
+            border: 2px solid #666;
+            width: 80px;
+            margin-right: -5px;
+            cursor: pointer;
+            transition: .2s;
+        }
+        .menu li.active {
+            color: white;
+            background-color: #F05837;
+            /*background-color: #F28A30;*/
+        }
+        .display-standard, .display-nano {
+            display: none;
+        }
+        .display-standard.visible, .display-nano.visible {
+            display: block;
+        }
+        .box {
+            text-align: center;
+            border-radius: 10px;
+            transition: all .3s;
+            background-color: #eeeeee;
+            user-select: none;
+            border: 1px solid #d8d8d8;
+        }
+        .box:hover {
+            border: 1px solid #bfbfbf;
+
+        }
+        .box.tall{
+            height: 100px;
+            line-height: 100px;
+
+        }
+        pre.hljs {
+            text-align: left;
+            padding: 20px;
+            background-color: #eeeeee;
+            margin: 10px 0;
+        }
+        pre {
+            display: inline-block;
+            padding: 6px 20px;
+            background-color: #eeeeee;
+            margin: 0;
+        }
+        table {
+            text-align: center;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table th {
+            border-bottom: 1px solid #e9e9e9;
+        }
+        table th, table td { padding: 6px }
+        table tbody tr:nth-child(odd) {
+            background-color: #fbfbfb;
+        }
+        .margin {
+            margin: 10px 0;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 2em;
+            margin: 14px 0 18px 0;
+        }
+        @media only screen and (max-width: 600px) {
+            .title {
+                font-size: 1.6em !important;
+            }
+            .subtitle {
+                font-size: 1.4em !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="title">
+        Full feautured flexbox grid in 40 lines of SASS
+    </div>
+    <div class="star">
+        <a class="github-button" href="https://github.com/alexcambose/40-lines-of-Sass" data-size="large" data-show-count="true" aria-label="Star alexcambose/40-lines-of-Sass on GitHub">Star</a>
+    </div>
+</header>
+<div class="content" id="top">
+    <div class="container">
+        <div class="title">Why use it ?</div>
+
+        <div class="why">
+            <div class="row">
+                <div class="w-md-4 info-box">
+                    <div>
+                        <img class="icon" src="lightweight.svg" alt="Lightweight">
+                    </div>
+                    <div class="title">Lightweight</div>
+                    <div class="description">
+                        Fast and concise code. 40 lines the standard version and 24 the nano one.
+                    </div>
+                </div>
+                <div class="w-md-4 info-box">
+                    <div>
+                        <img class="icon" src="bulb.svg" alt="Lightweight">
+                    </div>
+                    <div class="title">Easy to use</div>
+                    <div class="description">
+                        No fancy intallation is needed to get it running. Just copy-paste and you are done.
+                    </div>
+                </div>
+                <div class="w-md-4 info-box">
+                    <div>
+                        <img class="icon" src="responsive.svg" alt="Lightweight">
+                    </div>
+                    <div class="title">Responsive</div>
+                    <div class="description">
+                        It’s built with flexbox and is fully responsive meaning that your web page will look great on all devices.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flavour">
+            <div class="title">Choose your flavour</div>
+            <ul class="menu" id="flavour">
+                <li class="active" id="display-standard">Standard</li>
+                <li id="display-nano">Nano</li>
+            </ul>
+            <div class="display-standard visible">
+                <pre class="hljs" style="display: block; overflow-x: auto; color: rgb(88, 82, 96);"><span class="hljs-variable" style="color: rgb(190, 70, 120);">$grid-rows</span>: <span class="hljs-number" style="color: rgb(170, 87, 60);">12</span>
+<span class="hljs-variable" style="color: rgb(190, 70, 120);">$sizes</span>: (sm <span class="hljs-number" style="color: rgb(170, 87, 60);">480px</span>, md <span class="hljs-number" style="color: rgb(170, 87, 60);">768px</span>, lg <span class="hljs-number" style="color: rgb(170, 87, 60);">992px</span>, xl <span class="hljs-number" style="color: rgb(170, 87, 60);">1200px</span>)
+<span class="hljs-variable" style="color: rgb(190, 70, 120);">$prefix</span>: <span class="hljs-string" style="color: rgb(42, 146, 146);">'w'</span>
+<span class="hljs-variable" style="color: rgb(190, 70, 120);">$padding</span>: <span class="hljs-number" style="color: rgb(170, 87, 60);">6px</span> <span class="hljs-number" style="color: rgb(170, 87, 60);">4px</span>
+.container
+  margin: <span class="hljs-number" style="color: rgb(170, 87, 60);">0</span> auto
+.row
+  display: flex
+  flex-wrap: wrap
+  &gt; div[class*=<span class="hljs-string" style="color: rgb(42, 146, 146);">'#{$prefix}-'</span>]
+    padding: <span class="hljs-variable" style="color: rgb(190, 70, 120);">$padding</span>
+    box-sizing: border-box
+  &gt; div:not([class*=<span class="hljs-string" style="color: rgb(42, 146, 146);">'#{$prefix}-'</span>])
+    flex: <span class="hljs-number" style="color: rgb(170, 87, 60);">1</span>
+    padding: <span class="hljs-variable" style="color: rgb(190, 70, 120);">$padding</span>
+  @for <span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span> from <span class="hljs-number" style="color: rgb(170, 87, 60);">1</span> through <span class="hljs-variable" style="color: rgb(190, 70, 120);">$grid-rows</span>
+    .#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$prefix</span>}-#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span>}
+      flex-basis: <span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span> / <span class="hljs-variable" style="color: rgb(190, 70, 120);">$grid-rows</span> * <span class="hljs-number" style="color: rgb(170, 87, 60);">100%</span>
+    .#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$prefix</span>}-offset-#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span>}
+      margin-left: <span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span> / <span class="hljs-variable" style="color: rgb(190, 70, 120);">$grid-rows</span> * <span class="hljs-number" style="color: rgb(170, 87, 60);">100%</span>
+    @each <span class="hljs-variable" style="color: rgb(190, 70, 120);">$sizeLabel</span>, <span class="hljs-variable" style="color: rgb(190, 70, 120);">$value</span> in <span class="hljs-variable" style="color: rgb(190, 70, 120);">$sizes</span>
+      [class*=<span class="hljs-string" style="color: rgb(42, 146, 146);">'#{$prefix}-offset-#{$sizeLabel}-'</span>]
+        margin-left: <span class="hljs-number" style="color: rgb(170, 87, 60);">0</span>
+      .#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$prefix</span>}-#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$sizeLabel</span>}-#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span>}
+        flex-basis: <span class="hljs-number" style="color: rgb(170, 87, 60);">100%</span>
+  @each <span class="hljs-variable" style="color: rgb(190, 70, 120);">$classLabel</span>, <span class="hljs-variable" style="color: rgb(190, 70, 120);">$cssValue</span> in (align-start flex-start, align-center center, align-end flex-end)
+    &gt; div[class*=<span class="hljs-string" style="color: rgb(42, 146, 146);">'#{$prefix}-'</span>].#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$classLabel</span>}
+      align-self: <span class="hljs-variable" style="color: rgb(190, 70, 120);">$cssValue</span>
+  @each <span class="hljs-variable" style="color: rgb(190, 70, 120);">$classLabel</span>, <span class="hljs-variable" style="color: rgb(190, 70, 120);">$cssValue</span> in (align-start flex-start, align-center center, align-end flex-end, space-around space-around, space-between space-between)
+    &amp;.#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$classLabel</span>}
+      justify-content: <span class="hljs-variable" style="color: rgb(190, 70, 120);">$cssValue</span>
+@each <span class="hljs-variable" style="color: rgb(190, 70, 120);">$sizeLabel</span>, <span class="hljs-variable" style="color: rgb(190, 70, 120);">$value</span> in <span class="hljs-variable" style="color: rgb(190, 70, 120);">$sizes</span>
+  @media only screen and (min-width: #{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$value</span>})
+    @for <span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span> from <span class="hljs-number" style="color: rgb(170, 87, 60);">1</span> through <span class="hljs-variable" style="color: rgb(190, 70, 120);">$grid-rows</span>
+      .row &gt; .#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$prefix</span>}-#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$sizeLabel</span>}-#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span>}
+        flex-basis: <span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span> / <span class="hljs-variable" style="color: rgb(190, 70, 120);">$grid-rows</span> * <span class="hljs-number" style="color: rgb(170, 87, 60);">100%</span>
+      .row &gt; .#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$prefix</span>}-offset-#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$sizeLabel</span>}-#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span>}
+        margin-left: <span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span> / <span class="hljs-variable" style="color: rgb(190, 70, 120);">$grid-rows</span> * <span class="hljs-number" style="color: rgb(170, 87, 60);">100%</span>
+    .container
+      width: if(index(<span class="hljs-variable" style="color: rgb(190, 70, 120);">$sizes</span>,<span class="hljs-variable" style="color: rgb(190, 70, 120);">$sizeLabel</span> <span class="hljs-variable" style="color: rgb(190, 70, 120);">$value</span>) &gt; <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>, <span class="hljs-variable" style="color: rgb(190, 70, 120);">$value</span>, <span class="hljs-number" style="color: rgb(170, 87, 60);">99%</span>)</pre>
+            </div>
+            <div class="display-nano">
+                <pre class="hljs" style="display: block; overflow-x: auto;color: rgb(88, 82, 96);"><span class="hljs-selector-class" style="color: rgb(190, 70, 120);">.container</span>
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number" style="color: rgb(170, 87, 60);">0</span> auto
+.row
+  display: flex
+  flex-wrap: wrap
+  &gt; div[class*=<span class="hljs-string" style="color: rgb(42, 146, 146);">'w-'</span>]
+    padding: <span class="hljs-number" style="color: rgb(170, 87, 60);">6px</span> <span class="hljs-number" style="color: rgb(170, 87, 60);">4px</span>
+    box-sizing: border-box
+  &gt; div:not([class*=<span class="hljs-string" style="color: rgb(42, 146, 146);">'w-'</span>])
+    flex: <span class="hljs-number" style="color: rgb(170, 87, 60);">1</span>
+    padding: <span class="hljs-number" style="color: rgb(170, 87, 60);">6px</span> <span class="hljs-number" style="color: rgb(170, 87, 60);">4px</span>
+  @for <span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span> from <span class="hljs-number" style="color: rgb(170, 87, 60);">1</span> through <span class="hljs-number" style="color: rgb(170, 87, 60);">12</span>
+    .w-#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span>}
+      flex-basis: <span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">12</span> * <span class="hljs-number" style="color: rgb(170, 87, 60);">100%</span>
+    @each <span class="hljs-variable" style="color: rgb(190, 70, 120);">$sizeLabel</span>, <span class="hljs-variable" style="color: rgb(190, 70, 120);">$value</span> in (sm <span class="hljs-number" style="color: rgb(170, 87, 60);">480px</span>, md <span class="hljs-number" style="color: rgb(170, 87, 60);">768px</span>, lg <span class="hljs-number" style="color: rgb(170, 87, 60);">992px</span>, xl <span class="hljs-number" style="color: rgb(170, 87, 60);">1200px</span>)
+      .w-#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$sizeLabel</span>}-#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span>}
+        flex-basis: <span class="hljs-number" style="color: rgb(170, 87, 60);">100%</span>
+@each <span class="hljs-variable" style="color: rgb(190, 70, 120);">$sizeLabel</span>, <span class="hljs-variable" style="color: rgb(190, 70, 120);">$value</span> in (sm <span class="hljs-number" style="color: rgb(170, 87, 60);">480px</span>, md <span class="hljs-number" style="color: rgb(170, 87, 60);">768px</span>, lg <span class="hljs-number" style="color: rgb(170, 87, 60);">992px</span>, xl <span class="hljs-number" style="color: rgb(170, 87, 60);">1200px</span>)
+  @media only screen and (min-width: #{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$value</span>})
+    @for <span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span> from <span class="hljs-number" style="color: rgb(170, 87, 60);">1</span> through <span class="hljs-number" style="color: rgb(170, 87, 60);">12</span>
+      .row &gt; .w-#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$sizeLabel</span>}-#{<span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span>}
+        flex-basis: <span class="hljs-variable" style="color: rgb(190, 70, 120);">$i</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">12</span> * <span class="hljs-number" style="color: rgb(170, 87, 60);">100%</span>
+    .container
+      width: if(index((sm <span class="hljs-number" style="color: rgb(170, 87, 60);">480px</span>, md <span class="hljs-number" style="color: rgb(170, 87, 60);">768px</span>, lg <span class="hljs-number" style="color: rgb(170, 87, 60);">992px</span>, xl <span class="hljs-number" style="color: rgb(170, 87, 60);">1200px</span>),<span class="hljs-variable" style="color: rgb(190, 70, 120);">$sizeLabel</span> <span class="hljs-variable" style="color: rgb(190, 70, 120);">$value</span>) &gt; <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>, <span class="hljs-variable" style="color: rgb(190, 70, 120);">$value</span>, <span class="hljs-number" style="color: rgb(170, 87, 60);">99%</span>)</pre>
+            <ul>
+                <li>No <code>offset</code> classes</li>
+                <li>No <code>alignment</code> classes</li>
+            </ul>
+            </div>
+        </div>
+
+        <div class="usage">
+            <div class="title">Container</div>
+            <pre class="hljs" style="display: block; overflow-x: auto; color: rgb(88, 82, 96);"><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"container"</span>&gt;</span>
+<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span></pre>
+            <div class="title" id="grid">The grid</div>
+            <div class="subtitle">Equal widths</div>
+            <div class="row">
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+            </div>
+            <div class="row">
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+            </div>
+            <div class="row">
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+                <div><div class="box">ﾠ</div></div>
+            </div>
+            <pre class="hljs" style="display: block; overflow-x: auto; color: rgb(88, 82, 96); "><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"row"</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span></pre>
+            <div class="subtitle">Custom widths</div>
+
+            <div class="row">
+                <div class="w-1">
+                    <div class="box">w-1</div>
+                </div>
+                <div class="w-11">
+                    <div class="box">w-11</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="w-2">
+                    <div class="box">w-2</div>
+                </div>
+                <div class="w-10">
+                    <div class="box">w-10</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="w-3">
+                    <div class="box">w-3</div>
+                </div>
+                <div class="w-9">
+                    <div class="box">w-9</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="w-4">
+                    <div class="box">w-4</div>
+                </div>
+                <div class="w-8">
+                    <div class="box">w-8</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="w-5">
+                    <div class="box">w-5</div>
+                </div>
+                <div class="w-7">
+                    <div class="box">w-7</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="w-6">
+                    <div class="box">w-6</div>
+                </div>
+                <div class="w-6">
+                    <div class="box">w-6</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="w-7">
+                    <div class="box">w-7</div>
+                </div>
+                <div class="w-5">
+                    <div class="box">w-5</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="w-8">
+                    <div class="box">w-8</div>
+                </div>
+                <div class="w-4">
+                    <div class="box">w-4</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="w-9">
+                    <div class="box">w-9</div>
+                </div>
+                <div class="w-3">
+                    <div class="box">w-3</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="w-10">
+                    <div class="box">w-10</div>
+                </div>
+                <div class="w-2">
+                    <div class="box">w-2</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="w-11">
+                    <div class="box">w-11</div>
+                </div>
+                <div class="w-1">
+                    <div class="box">w-1</div>
+                </div>
+            </div>
+            <pre class="hljs" style="display: block; overflow-x: auto;color: rgb(88, 82, 96); "><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"row"</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"w-1"</span>&gt;</span>w-1<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"w-11"</span>&gt;</span>w-11<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span></pre>
+            <div class="title" id="responsive">Responsive classes</div>
+            <div class="row">
+                <div class="w-4"><div class="box">w-4</div></div>
+                <div class="w-4"><div class="box">w-4</div></div>
+                <div class="w-4"><div class="box">w-4</div></div>
+            </div>
+            <div class="row">
+                <div class="w-sm-4"><div class="box">w-sm-4</div></div>
+                <div class="w-sm-4"><div class="box">w-sm-4</div></div>
+                <div class="w-sm-4"><div class="box">w-sm-4</div></div>
+            </div>
+            <div class="row">
+                <div class="w-md-4"><div class="box">w-md-4</div></div>
+                <div class="w-md-4"><div class="box">w-md-4</div></div>
+                <div class="w-md-4"><div class="box">w-md-4</div></div>
+            </div>
+            <div class="row">
+                <div class="w-lg-4"><div class="box">w-lg-4</div></div>
+                <div class="w-lg-4"><div class="box">w-lg-4</div></div>
+                <div class="w-lg-4"><div class="box">w-lg-4</div></div>
+            </div>
+            <div class="row">
+                <div class="w-xl-4"><div class="box">w-xl-4</div></div>
+                <div class="w-xl-4"><div class="box">w-xl-4</div></div>
+                <div class="w-xl-4"><div class="box">w-xl-4</div></div>
+            </div>
+            <div class="row">
+                <div class="w-sm-1 w-lg-4 w-xl-3"><div class="box">w-sm-1 w-lg-4 w-xl-3</div></div>
+                <div class="w-sm-5 w-lg-2 w-xl-3"><div class="box">w-sm-5 w-lg-2 w-xl-3</div></div>
+                <div class="w-sm-5 w-lg-2 w-xl-3"><div class="box">w-sm-5 w-lg-2 w-xl-3</div></div>
+                <div class="w-sm-1 w-lg-4 w-xl-3"><div class="box">w-sm-1 w-lg-4 w-xl-3</div></div>
+            </div>
+            <div class="row">
+                <div class="w-offset-md-3 w-md-6">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Keyword</th>
+                            <th>Size</th>
+                            <th>Class name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><pre>sm</pre></td>
+                            <td>> 480px</td>
+                            <td>.w-sm-*</td>
+                        </tr>
+                        <tr>
+                            <td><pre>md</pre></td>
+                            <td>> 768px</td>
+                            <td>.w-md-*</td>
+                        </tr>
+                        <tr>
+                            <td><pre>lg</pre></td>
+                            <td>> 992px</td>
+                            <td>.w-lg-*</td>
+                        </tr>
+                        <tr>
+                            <td><pre>xl</pre></td>
+                            <td>> 1200px</td>
+                            <td>.w-xl-*</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <pre class="hljs" style="display: block; overflow-x: auto; color: rgb(88, 82, 96);"><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"row"</span>&gt;</span>
+     <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"w-md-4"</span>&gt;</span>w-md-4<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+     <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"w-md-4"</span>&gt;</span>w-md-4<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"w-md-4"</span>&gt;</span>w-md-4<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span></pre>
+            <div class="title" id="offset">Offset</div>
+            <div class="row">
+                <div class="w-11 w-offset-1"><div class="box">w-11 w-offset-1</div></div>
+            </div>
+            <div class="row">
+                <div class="w-10 w-offset-2"><div class="box">w-10 w-offset-2</div></div>
+            </div>
+            <div class="row">
+                <div class="w-9 w-offset-3"><div class="box">w-9 w-offset-3</div></div>
+            </div>
+            <div class="row">
+                <div class="w-8 w-offset-4"><div class="box">w-8 w-offset-4</div></div>
+            </div>
+            <div class="row">
+                <div class="w-7 w-offset-5"><div class="box">w-7 w-offset-5</div></div>
+            </div>
+            <div class="row">
+                <div class="w-6 w-offset-6"><div class="box">w-6 w-offset-6</div></div>
+            </div>
+            <div class="row">
+                <div class="w-3 w-offset-2"><div class="box">w-3 w-offset-2</div></div>
+                <div class="w-3 w-offset-2"><div class="box">w-3 w-offset-2</div></div>
+            </div>
+            <div class="row">
+                <div class="w-md-3 w-offset-md-2"><div class="box">w-md-3 w-offset-md-2</div></div>
+            </div>
+            <div class="row">
+                <div class="w-sm-6 w-offset-sm-2 w-md-3 w-offset-md-3 w-lg-2 w-offset-lg-1"><div class="box">w-sm-6 w-offset-sm-2 w-md-3 w-offset-md-3 w-lg-2 w-offset-lg-1</div></div>
+                <div class="w-sm-3 w-offset-sm-1 w-md-3 w-offset-md-3 w-lg-5 w-offset-lg-4"><div class="box">w-sm-3 w-offset-sm-2 w-md-3 w-offset-md-3 w-lg-5 w-offset-lg-4</div></div>
+            </div>
+            <pre class="hljs" style="display: block; overflow-x: auto; color: rgb(88, 82, 96); "><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"row"</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"w-11 w-offset-1"</span>&gt;</span><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"box"</span>&gt;</span>w-11 w-offset-1<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"row"</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"w-md-3 w-offset-md-2"</span>&gt;</span><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"box"</span>&gt;</span>w-md-3 w-offset-md-2<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span></pre>
+            <div class="title">Alignment</div>
+            <div class="subtitle">Vertical alignment</div>
+            <div class="row">
+                <div class="w-3"><div class="box tall">w-3</div></div>
+                <div class="w-3 align-start"><div class="box">w-3 align-start</div></div>
+                <div class="w-3 align-center"><div class="box">w-3 align-center</div></div>
+                <div class="w-3 align-end"><div class="box">w-3 align-end</div></div>
+            </div>
+            <pre class="hljs" style="display: block; overflow-x: auto; color: rgb(88, 82, 96); "> <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"row"</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"w-3"</span>&gt;</span>w-3<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"w-3 align-start"</span>&gt;</span>w-3 align-start<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"w-3 align-center"</span>&gt;</span>w-3 align-center<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"w-3 align-end"</span>&gt;</span>w-3 align-end<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span></pre>
+            <div class="subtitle">Horizontal alignment</div>
+            <div class="box">
+                row align-start
+                <div class="row align-start">
+                    <div class="w-2"><div class="box">w-2</div></div>
+                    <div class="w-2"><div class="box">w-2</div></div>
+                    <div class="w-2"><div class="box">w-2</div></div>
+                </div>
+            </div>
+            <div class="box margin">
+                row align-center
+                <div class="row align-center">
+                    <div class="w-2"><div class="box">w-2</div></div>
+                    <div class="w-2"><div class="box">w-2</div></div>
+                    <div class="w-2"><div class="box">w-2</div></div>
+                </div>
+            </div>
+            <div class="box margin">
+                row align-end
+                <div class="row align-end">
+                    <div class="w-2"><div class="box">w-2</div></div>
+                    <div class="w-2"><div class="box">w-2</div></div>
+                    <div class="w-2"><div class="box">w-2</div></div>
+                </div>
+            </div>
+            <div class="box margin">
+                row space-around
+                <div class="row space-around">
+                    <div class="w-2"><div class="box">w-2</div></div>
+                    <div class="w-2"><div class="box">w-2</div></div>
+                    <div class="w-2"><div class="box">w-2</div></div>
+                </div>
+            </div>
+            <div class="box margin">
+                row space-between
+                <div class="row space-between">
+                    <div class="w-2"><div class="box">w-2</div></div>
+                    <div class="w-2"><div class="box">w-2</div></div>
+                    <div class="w-2"><div class="box">w-2</div></div>
+                </div>
+            </div>
+
+            <pre class="hljs" style="display: block; overflow-x: auto; color: rgb(88, 82, 96);"><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"row align-center"</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"w-2"</span>&gt;</span>w-2<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"w-2"</span>&gt;</span>w-2<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"w-2"</span>&gt;</span>w-2<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span></pre>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <ul>
+            <li>Full feautured flexbox grid in 40 lines of Sass</li>
+            <li>Contribute on <a href="https://github.com/alexcambose/40-lines-of-Sass" target="_blank"><i class="fab fa-github"></i></a></li>
+        </ul>
+        <!-- Place this tag where you want the button to render. -->
+        <div style="margin: auto" >
+            <!-- Place this tag where you want the button to render. -->
+            <a class="github-button" href="https://github.com/alexcambose" data-size="large" data-show-count="true" aria-label="Follow @alexcambose on GitHub">Follow @alexcambose</a>
+        </div>
+        <div class="right">
+            <div class="license">Licensed under the <a href="https://opensource.org/licenses/MIT">MIT</a> license</div>
+            <a class="go-up" href="#top">Go up <i class="fas fa-level-up-alt"></i></a>
+        </div>
+
+    </div>
+</footer>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<script>
+    const toggleFooter = () => {
+        if(window.scrollY > 500) {
+            $('footer').show();
+        } else {
+            $('footer').hide();
+        }
+    }
+    $('#flavour').find('li').click(e => {
+        $('#flavour').find('li').removeClass('active');
+        $(e.target).addClass('active');
+        if($(e.target).attr('id') === 'display-standard') {
+            $('.display-standard').addClass('visible');
+            $('.display-nano').removeClass('visible');
+        } else {
+            $('.display-standard').removeClass('visible');
+            $('.display-nano').addClass('visible');
+        }
+    });
+    $(window).scroll(() => {
+       toggleFooter();
+    });
+    toggleFooter();
+
+</script>
+</body>
+</html>
