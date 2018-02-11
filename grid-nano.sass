@@ -1,0 +1,24 @@
+.container
+  margin: 0 auto
+.row
+  display: flex
+  flex-wrap: wrap
+  > div[class*='w-']
+    padding: 6px 4px
+    box-sizing: border-box
+  > div:not([class*='w-'])
+    flex: 1
+    padding: 6px 4px
+  @for $i from 1 through 12
+    .w-#{$i}
+      flex-basis: $i / 12 * 100%
+    @each $sizeLabel, $value in (sm 480px, md 768px, lg 992px, xl 1200px)
+      .w-#{$sizeLabel}-#{$i}
+        flex-basis: 100%
+@each $sizeLabel, $value in (sm 480px, md 768px, lg 992px, xl 1200px)
+  @media only screen and (min-width: #{$value})
+    @for $i from 1 through 12
+      .row > .w-#{$sizeLabel}-#{$i}
+        flex-basis: $i / 12 * 100%
+    .container
+      width: if(index((sm 480px, md 768px, lg 992px, xl 1200px),$sizeLabel $value) > 2, $value, 99%)
